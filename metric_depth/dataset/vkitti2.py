@@ -20,7 +20,7 @@ class VKITTI2(Dataset):
             Resize(
                 width=net_w,
                 height=net_h,
-                resize_target=True if mode == 'train' else False,
+                resize_target=True,
                 keep_aspect_ratio=True,
                 ensure_multiple_of=14,
                 resize_method='lower_bound',
