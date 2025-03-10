@@ -54,8 +54,10 @@ class VKITTI2(Dataset):
 
         # 🔹 Only keep paths containing "Scene18/morning"
         self.filelist = [
-            (os.path.join(self.root_dir, line.split(" ")[0]),  # Image Path
-             os.path.join(self.root_dir, line.split(" ")[1]))  # Depth Path
+            (
+                os.path.join(self.root_dir, line.split(" ")[0]),  # Image Path
+                os.path.join(self.root_dir, line.split(" ")[1]),
+            )  # Depth Path
             for line in lines
         ]
 
@@ -70,7 +72,9 @@ class VKITTI2(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) / 255.0
 
         # 🔹 Load and preprocess depth map (Convert cm to meters)
-        depth = cv2.imread(depth_path, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH) / 100.0  
+        depth = (
+            cv2.imread(depth_path, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH) / 100.0
+        )
 
         # 🔹 Apply transformations
         sample = self.transform({"image": image, "depth": depth})
